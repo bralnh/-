@@ -1,0 +1,749 @@
+<style>
+        .header{
+        display: flex;
+        margin-top:22px ;
+        margin-bottom: 22px;
+        height: 88px;
+        background-color:rgba(205,209,255,0.842);
+        border-radius: 10px;
+       }
+       .logo{
+        margin-right: 40px;
+        width: 200px;
+        height: 88px;
+        background-color:rgba(205,209,255,0.842);
+        border-radius: 10px;
+        
+       }
+       
+        .nav ul li a {
+        font-weight: bold;   /* 加粗 */
+        font-size: 18px;     /* 放大字号（可根据需要调整） */
+        }
+        .nav {
+        display: flex;
+        justify-content: center; /* 水平居中 */
+  
+        }
+       
+    
+    
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+        background: #ff6b6b;
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background: #ff5252;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 82, 82, 0.4);
+    }
+    
+    .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+    
+    .btn-secondary:hover {
+        background: white;
+        color: #667eea;
+    }
+     /* 资源预览区块样式 */
+    .resources-section {
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #f8f9ff 0%, #e6e6fa 100%);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #6a5acd;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 50px;
+        font-size: 1.1rem;
+    }
+
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .resource-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(106, 90, 205, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .resource-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(106, 90, 205, 0.2);
+    }
+
+    .card-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .resource-card:hover .card-image img {
+        transform: scale(1.05);
+    }
+
+    .card-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(138, 43, 226, 0.9);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 15px;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    .card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .info-item {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .card-description {
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .card-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .card-btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+
+    .card-btn {
+        background: #8a2be2;
+        color:white;
+    }
+
+    .card-btn:hover {
+        background: #6a5acd;
+        transform: translateY(-2px);
+    }
+
+    .card-btn.secondary {
+        background: transparent;
+        color: #8a2be2;
+        border: 1px solid #8a2be2;
+    }
+
+    .card-btn.secondary:hover {
+        background: #8a2be2;
+        color: white;
+    }
+
+    .view-more {
+        text-align: center;
+    }
+
+    .view-more-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #8a2be2 0%, #6a5acd 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .view-more-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+    }
+    body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6e6fa 100%);
+            color: #333;
+        }
+        
+        .overview-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #6a5acd;
+            margin-bottom: 10px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(106, 90, 205, 0.1);
+        }
+        
+        .chart-title {
+            color: #6a5acd;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .chart {
+            height: 350px;
+        }
+        
+        .stats {
+            background:white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(106, 90, 205, 0.1);
+        }
+        
+        .stats h2 {
+            color: #6a5acd;
+            margin-bottom: 25px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6e6fa 100%);
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8a2be2;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f8f9ff;
+            margin: 0;
+            padding: 20px;
+        }
+        .chart-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(106, 90, 205, 0.1);
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .chart-title {
+            color: #6a5acd;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .chart {
+            height: 450px;
+        }
+         .chart-sidebar {
+            width: 350px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+        
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .chart-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .ai-badge {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .ai-icon {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        
+        .chart-container {
+            height: 320px;
+        }
+        
+        .chart-footer {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .intro-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .intro-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .intro-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            transition:transform 0.3s ease;
+        }
+        .feature-item:hover{
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size:2.5px;
+            margin-bottom:15px;
+            display: block;
+        }
+        
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom:10px;
+            color:white;
+        }
+        
+        .feature-item p {
+            font: size 0.95em;
+            opacity: 0.8;
+           
+        }
+         .intro-section {
+            padding: 80px 40px;
+            text-align: center;
+        }
+        
+        .intro-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .intro-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .feature-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        /* AI助手图标 */
+        .ai-assistant {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            background: #333;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+         .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #8a2be2; /* 紫色 */
+            margin-bottom: 20px;
+            text-align: center; /* 居中 */
+            line-height: 1.3;
+        }
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e6e6fa 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+         .intro-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+    }
+    
+    .intro-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .intro-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .intro-description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        opacity: 0.9;
+    }
+    
+    .features {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+    }
+    
+    .feature-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 25px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        min-width: 200px;
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        display: block;
+        margin-bottom: 15px;
+    }
+    
+    .feature-item h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color:black;
+    }
+    
+    .feature-item p {
+        font-size: 0.95rem;
+        opacity: 0.8;
+    }
+     .logo a {
+        display: block;
+        width:200px;
+        height: 80px;
+        background-image: url(../images/d07a289ec984ef48c203ffef13236872.jpg);
+        font-size: 0;
+        }
+        .header{
+        display: flex;
+        margin-top:22px ;
+        margin-bottom: 22px;
+        height: 88px;
+        background-color: blanchedalmond;
+       }
+       .logo{
+        margin-right: 40px;
+        width: 200px;
+        height: 88px;
+       background-color: bisque;
+       }
+       .logo a {
+        display: block;
+        width:200px;
+        height: 88px;
+        background-image: url(../images/微信图片_20251013181419_46_43.jpg);
+        }
+        .header{
+        display: flex;
+        margin-top:22px ;
+        margin-bottom: 22px;
+        height: 88px;
+        background-color:rgba(205,209,255,0.842);
+        border-radius: 10px;
+       }
+       .logo{
+        margin-right: 40px;
+        width: 200px;
+        height: 88px;
+        background-color:rgba(205,209,255,0.842);
+        border-radius: 10px;
+        
+       }
+        .logo a {
+        display: block;
+        width: 200px; /* 修改这个值来控制Logo的宽度 */
+        height: 60px; /* 修改这个值来控制Logo的高度 */
+        background-image: url('../images/d07a289ec984ef48c203ffef13236872.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain; /* 这个属性很重要，见下面的说明 */
+        font-size: 0;
+        text-indent: -9999px;
+        }
+        .nav{
+            margin-top: 33px;
+        }
+        .nav ul{
+            display: flex;
+        }
+        .nav li{
+            margin-right:300px;
+        }
+        .nav li a {
+            padding-bottom: 10px;
+            background-color: rgba(205,209,255,0.842)
+        }
+        .nav li a:hover{
+         border-bottom:2px solid black;
+         color: black;
+        }
+          .header{
+        display: flex;
+        margin-top:22px ;
+        margin-bottom: 22px;
+        height: 88px;
+        background-color:rgba(205,209,255,0.842);
+        border-radius: 10px;
+       }
+       .logo{
+        margin-right: 40px;
+        width: 200px;
+        height: 88px;
+        background-color:rgba(205,209,255,0.842);
+        border-radius: 10px;
+        
+       }
+        .logo a {
+        display: block;
+        width: 200px; /* 修改这个值来控制Logo的宽度 */
+        height: 60px; /* 修改这个值来控制Logo的高度 */
+        background-image: url('../images/d07a289ec984ef48c203ffef13236872.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain; /* 这个属性很重要，见下面的说明 */
+        font-size: 0;
+        text-indent: -9999px;
+        }
+        body {
+    background: linear-gradient(135deg, #8a2be2 0%, #6a5acd 100%);
+    color: white; /* 文字改为白色 */
+}
+       
+        
+    .category-card {
+    background: rgba(255, 255, 255, 0.15); /* 半透明白色 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* 半透明边框 */
+}
+</style>
