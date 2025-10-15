@@ -1,0 +1,198 @@
+<div id="resources" class="content-section"></div>
+     <div class="container">
+        <h1 class="page-title">演出资源库</h1>
+        
+        <div class="search-section">
+            <input type="text" class="search-input" placeholder="搜索演出名称、演员或关键词..." id="searchInput">
+            <button class="search-btn" onclick="searchResources()">搜索</button>
+            
+            <button class="add-resource-btn" onclick="openModal()">+ 添加新演出</button>
+        </div>
+        
+        <div id="resourcesGrid" class="resources-grid">
+            <!-- 资源卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <h3>未找到相关演出</h3>
+            <p>尝试使用其他关键词搜索，或添加新的演出资源</p>
+        </div>
+    </div>
+    
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">添加新演出</h2>
+            <form id="resourceForm">
+                <div class="form-group">
+                    <label>演出标题</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label>演出类型</label>
+                    <select id="type" required>
+                        <option value="">请选择类型</option>
+                        <option value="演唱会">演唱会</option>
+                        <option value="音乐剧">音乐剧</option>
+                        <option value="话剧">话剧</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>演出时间</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label>演出地点</label>
+                    <input type="text" id="location" required>
+                </div>
+                <div class="form-group">
+                    <label>主演/剧团</label>
+                    <input type="text" id="cast" required>
+                </div>
+                <div class="form-group">
+                    <label>剧情简介</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>海报图片URL</label>
+                    <input type="url" id="image" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label>购票链接</label>
+                    <input type="url" id="link" placeholder="https://ticket.com">
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="submit-btn">添加演出</button>
+                    <button type="button" class="cancel-btn" onclick="closeModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 使用您指定的演出数据
+        const initialResources = [
+            {
+                title: "《五条人2025'地球恋曲'剧场巡演》",
+                type: "演唱会",
+                date: "2025-10-19",
+                location: "苏州湾大剧院",
+                cast: "五条人",
+                description: "恋曲不止唱给恋人听，也可以唱给宇宙",
+                image: "https://images.sj33.cn/uploads/202008/194JCW2-0.jpg",
+                link: "#"
+            },
+            
+        ];
+        localStorage.removeItem('performanceResources');
+
+          localStorage.removeItem('performanceResources'); // 清除旧数据
+localStorage.setItem('performanceResources', JSON.stringify(initialResources)); // 保存新数据
+
+         // 初始化资源数据
+        let resources = JSON.parse(localStorage.getItem('performanceResources')) || initialResources;
+
+        // 页面加载时渲染资源
+        document.addEventListener('DOMContentLoaded', function() {
+            renderResources(resources);
+            // 如果没有数据，保存初始数据
+            if (!localStorage.getItem('performanceResources')) {
+                localStorage.setItem('performanceResources', JSON.stringify(initialResources));
+            }
+        });
+
+        // 渲染资源列表
+        function renderResources(resourcesToRender) {
+            const grid = document.getElementById('resourcesGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            grid.innerHTML = '';
+            
+            if (resourcesToRender.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            resourcesToRender.forEach(resource => {
+                const card = document.createElement('div');
+                card.className = 'resource-card';
+                card.innerHTML = `
+                    <img src="${resource.image}" alt="${resource.title}" class="card-image">
+                    <div class="card-content">
+                        <span class="resource-type">${resource.type}</span>
+                        <h3 class="resource-title">${resource.title}</h3>
+                        <p class="resource-description">${resource.description}</p>
+                        <p class="resource-meta">
+                            🗓️ ${formatDate(resource.date)} | 🏟️ ${resource.location}<br>
+                            ⭐ ${resource.cast}
+                        </p>
+                        <a href="${resource.link}" class="resource-link" target="_blank">立即购票</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 搜索功能
+        function searchResources() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredResources = resources.filter(resource => 
+                resource.title.toLowerCase().includes(searchTerm) ||
+                resource.description.toLowerCase().includes(searchTerm) ||
+                resource.cast.toLowerCase().includes(searchTerm) ||
+                resource.type.toLowerCase().includes(searchTerm)
+            );
+            renderResources(filteredResources);
+        }
+
+        // 添加资源功能
+        document.getElementById('resourceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newResource = {
+                title: document.getElementById('title').value,
+                type: document.getElementById('type').value,
+                date: document.getElementById('date').value,
+                location: document.getElementById('location').value,
+                cast: document.getElementById('cast').value,
+                description: document.getElementById('description').value,
+                image: document.getElementById('image').value || 'https://via.placeholder.com/350x200/6a5acd/ffffff?text=演出海报',
+                link: document.getElementById('link').value || '#'
+            };
+            
+            resources.push(newResource);
+            localStorage.setItem('performanceResources', JSON.stringify(resources));
+            renderResources(resources);
+            closeModal();
+            this.reset();
+        });
+
+        // 模态框控制
+        function openModal() {
+            document.getElementById('addModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('addModal').style.display = 'none';
+        }
+
+        // 日期格式化
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('addModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+    
